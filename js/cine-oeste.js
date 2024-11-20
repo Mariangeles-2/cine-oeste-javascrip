@@ -39,27 +39,37 @@ function agregarPelicula() {
 
 //3 - Eliminar película
 function eliminarPelicula() {
-  const posicionPeliculaAEliminar = parseInt(prompt("Seleccione el número de la película que desea eliminar: \n\n" + generarPeliculasConIndice())) - 1;
-  if (posicionPeliculaAEliminar >= 0 && posicionPeliculaAEliminar < peliculas.length) {
-    const nombrePeliculaAEliminar = peliculas[posicionPeliculaAEliminar];
-    peliculas.splice(posicionPeliculaAEliminar, 1);
-    alert("La película eliminada fue: " + nombrePeliculaAEliminar);
-  } else {
-    alert("Opción inválida. Serás redireccionado al menú.");
-  }
+  let posicionPeliculaAEliminar;
+  let volverAIntentarlo = true;
+
+  do {
+    posicionPeliculaAEliminar = parseInt(prompt("Seleccione el número de la película que desea eliminar: \n\n" + generarPeliculasConIndice())) - 1;
+    if (posicionPeliculaAEliminar >= 0 && posicionPeliculaAEliminar < peliculas.length) {
+      const nombrePeliculaAEliminar = peliculas[posicionPeliculaAEliminar];
+      peliculas.splice(posicionPeliculaAEliminar, 1);
+      alert("La película eliminada fue: " + nombrePeliculaAEliminar);
+    } else {
+      volverAIntentarlo = confirm("No se encontró la película a eliminar. Desea volver a intentarlo?");
+    }
+  } while (volverAIntentarlo && (posicionPeliculaAEliminar < 0 || posicionPeliculaAEliminar > peliculas.length));
 }
 
 //4 - Modificar película
 function modificarPelicula() {
-  const posicionPeliculaAModificar = parseInt(prompt("Seleccione el número de la película que desea modificar: \n\n" + generarPeliculasConIndice())) - 1;
-  if (posicionPeliculaAModificar >= 0 && posicionPeliculaAModificar < peliculas.length) {
-    const nombrePeliculaAModificar = peliculas[posicionPeliculaAModificar];
-    const nuevoNombreDePelicula = prompt("Ingrese el nuevo nombre de la película");
-    peliculas[posicionPeliculaAModificar] = nuevoNombreDePelicula;
-    alert("La película " + nombrePeliculaAModificar + " se modificó por la película " + nuevoNombreDePelicula);
-  } else {
-    alert("Opción inválida. Serás redireccionado al menú.");
-  }
+  let posicionPeliculaAModificar;
+  let volverAIntentarlo = true;
+
+  do {
+    posicionPeliculaAModificar = parseInt(prompt("Seleccione el número de la película que desea modificar: \n\n" + generarPeliculasConIndice())) - 1;
+    if (posicionPeliculaAModificar >= 0 && posicionPeliculaAModificar < peliculas.length) {
+      const nombrePeliculaAModificar = peliculas[posicionPeliculaAModificar];
+      const nuevoNombreDePelicula = prompt("Ingrese el nuevo nombre de la película");
+      peliculas[posicionPeliculaAModificar] = nuevoNombreDePelicula;
+      alert("La película " + nombrePeliculaAModificar + " se modificó por la película " + nuevoNombreDePelicula);
+    } else {
+      volverAIntentarlo = confirm("No se encontró la película a modificar. Desea volver a intentarlo?");
+    }
+  } while (volverAIntentarlo && (posicionPeliculaAModificar < 0 || posicionPeliculaAModificar > peliculas.length));
 }
 
 do {
